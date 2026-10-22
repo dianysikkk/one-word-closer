@@ -311,4 +311,42 @@ Object.keys(quizzes).forEach(renderQuiz);newPracticeTest(20);renderWords();updat
 })();
 </script>
 
+<script>
+/* One Word Closer: robust navigation fix for the games section */
+(function(){
+  function fixGamesNavigation(){
+    const page=document.getElementById('page-games');
+    const nav=document.getElementById('featureNav')||document.getElementById('mainNav');
+    if(nav && !document.getElementById('gamesNav')){
+      const b=document.createElement('button'); b.id='gamesNav'; b.dataset.page='games';
+      b.innerHTML='<span class="ico">🎮</span> Ігри';
+      nav.appendChild(b);
+    }
+    if(page){
+      const b=document.getElementById('gamesNav');
+      if(b) b.onclick=function(e){ if(e)e.preventDefault(); window.showPage('games'); };
+    }
+  }
+  const priorShow=window.showPage;
+  window.showPage=function(name){
+    if(name==='games'){
+      const page=document.getElementById('page-games');
+      if(!page){fixGamesNavigation();return;}
+      document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+      page.classList.add('active');
+      document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page==='games'));
+      const title=document.getElementById('headerTitle'); if(title)title.textContent='Ігрова кімната 🎮';
+      if(typeof toggleMenu==='function')toggleMenu(false);
+      window.scrollTo({top:0,behavior:'smooth'});
+      return;
+    }
+    if(typeof priorShow==='function')return priorShow(name);
+  };
+  document.addEventListener('click',function(e){
+    const btn=e.target.closest('#gamesNav');
+    if(btn){e.preventDefault();window.showPage('games');}
+  });
+  fixGamesNavigation();
+})();
+</script>
 </body></html>
