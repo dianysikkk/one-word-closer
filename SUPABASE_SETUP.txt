@@ -1,0 +1,68 @@
+ONE WORD CLOSER — АККАУНТИ ТА СИНХРОНІЗАЦІЯ
+
+ЩО ВЖЕ Є У ФАЙЛІ
+- Сторінка «Мій кабінет» у блакитному дизайні.
+- Локальний профіль: ім'я та рівень англійської.
+- Лічильники локального прогресу.
+- Експорт/імпорт резервної копії прогресу.
+- Інтеграція для справжніх акаунтів через Supabase, яка активується після налаштування нижче.
+
+ВАЖЛИВО
+Поки не додано власні Supabase URL та anon/publishable key, реєстрація і вхід у хмарний акаунт НЕ активні. Профіль і прогрес залишаються у браузері на цьому пристрої. Не вставляйте service_role/secret key у сайт — він публічний.
+
+КРОК 1. СТВОРИ SUPABASE ПРОЄКТ
+1. Відкрий https://supabase.com/ і створи проєкт.
+2. У налаштуваннях проєкту знайди Project URL і ключ anon/publishable (публічний ключ).
+3. У розділі Authentication перевір налаштування підтвердження email. Якщо ввімкнене підтвердження, після реєстрації треба відкрити лист і підтвердити адресу.
+
+КРОК 2. СТВОРИ ТАБЛИЦЮ ДЛЯ ПРОГРЕСУ
+У Supabase відкрий SQL Editor → New query, встав і виконай:
+
+create table if not exists public.owc_progress (
+  user_id uuid primary key references auth.users(id) on delete cascade,
+  profile jsonb not null default '{}'::jsonb,
+  progress jsonb not null default '{}'::jsonb,
+  updated_at timestamptz not null default now()
+);
+
+alter table public.owc_progress enable row level security;
+
+drop policy if exists "Users can read own OWC progress" on public.owc_progress;
+create policy "Users can read own OWC progress"
+on public.owc_progress for select
+to authenticated
+using (auth.uid() = user_id);
+
+drop policy if exists "Users can insert own OWC progress" on public.owc_progress;
+create policy "Users can insert own OWC progress"
+on public.owc_progress for insert
+to authenticated
+with check (auth.uid() = user_id);
+
+drop policy if exists "Users can update own OWC progress" on public.owc_progress;
+create policy "Users can update own OWC progress"
+on public.owc_progress for update
+to authenticated
+using (auth.uid() = user_id)
+with check (auth.uid() = user_id);
+
+КРОК 3. ДОДАЙ ДАНІ ПРОЄКТУ У index.html
+1. Відкрий index.html у редакторі коду.
+2. Знайди рядки:
+   const SUPABASE_URL = 'PASTE_YOUR_SUPABASE_PROJECT_URL_HERE';
+   const SUPABASE_ANON_KEY = 'PASTE_YOUR_SUPABASE_ANON_KEY_HERE';
+3. Заміни перше значення на Project URL, друге — на публічний anon/publishable key із Supabase.
+4. Не додавай service_role або secret key.
+5. Збережи index.html і завантаж його в репозиторій GitHub замість старого файлу. Натисни Commit changes.
+
+КРОК 4. ПЕРЕВІР
+1. Відкрий https://dianysikkk.github.io/one-word-closer/ і онови сторінку.
+2. В меню має бути «Мій кабінет».
+3. Створи акаунт з email і паролем щонайменше 8 символів. Якщо потрібно — підтверди email у листі.
+4. Увійди та натисни «Синхронізувати прогрес».
+
+ПРИМІТКИ
+- Файл підготовлений, але Supabase не можна підключити без URL і публічного ключа твого проєкту.
+- Перевірено синтаксис JavaScript, але повний тест у браузері не завершений.
+- Перед тим як покладатися на синхронізацію, перевір її тестовим акаунтом і переконайся, що дані повертаються після входу на іншому пристрої.
+- Якщо ти не хочеш налаштовувати базу самостійно, попроси дорослого, якому довіряєш, допомогти з налаштуванням Supabase. Не надсилай пароль від пошти або GitHub нікому.
