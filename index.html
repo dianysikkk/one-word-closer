@@ -442,4 +442,52 @@ Object.keys(quizzes).forEach(renderQuiz);newPracticeTest(20);renderWords();updat
 })();
 </script>
 
+<style id="halloweenTheme">
+:root{--bg:#17151b;--paper:#231f28;--ink:#f7f0e7;--muted:#b6aab8;--purple:#f07a32;--purple2:#ffb36b;--pale:#39281f;--pink:#3a2528;--mint:#29362c;--line:#403741;--shadow:0 14px 36px #09070c55}
+.dark-mode{--bg:#17151b;--paper:#231f28;--ink:#f7f0e7;--muted:#b6aab8;--purple:#f07a32;--purple2:#ffb36b;--pale:#39281f;--pink:#3a2528;--mint:#29362c;--line:#403741;--shadow:0 14px 36px #09070c55}
+body{background-color:var(--bg);background-image:radial-gradient(ellipse at 86% 9%,#512b2038,transparent 34%),radial-gradient(ellipse at 7% 78%,#39263a35,transparent 34%);color:var(--ink)}
+.sidebar{background:#1d1921;border-color:var(--line)}
+.logo{background:linear-gradient(135deg,#ed682c,#ffb04f);box-shadow:0 7px 20px #f0783240}
+.brand small,.nav-label{color:#b4a1ad}
+.nav button{color:#d0c3cd}
+.nav button:hover,.nav button.active{background:#3a2925;color:#ffad67}
+.sidebar-bottom{background:#292129;border-color:#46343a}
+.mini-progress{background:#453238}.mini-progress span{background:linear-gradient(90deg,#ed682c,#ffc15c)}
+.main{position:relative}
+.hero{position:relative;overflow:hidden;background:linear-gradient(125deg,#d65c27 0%,#8d3926 53%,#442431 100%);border:1px solid #f39a5a55;box-shadow:0 18px 42px #0a070b55}
+.hero:after{content:"🎃";position:absolute;right:5%;bottom:-22px;font-size:clamp(100px,15vw,190px);line-height:1;opacity:.17;pointer-events:none;filter:saturate(.8)}
+.hero>div{position:relative;z-index:1}.hero h2,.hero p,.hero .eyebrow{color:#fff7ec}.hero p{opacity:.9}
+.hero .btn.white{background:#fff2df;color:#71321f;border-color:#fff2df}
+.book{background:linear-gradient(145deg,#32252d,#211c27);border-color:#ffb36b;box-shadow:13px 15px 0 #572d2e,0 22px 40px #21121e66}
+.book strong,.book small{color:#fff1dc}.book .spark{color:#ffb36b}
+.panel,.stat,.course-card,.lesson-card,.word-card,.game-choice,.video-card,.account-card{background:var(--paper);border-color:var(--line);box-shadow:var(--shadow);color:var(--ink)}
+.panel p,.course-card p,.lesson-card p,.word-card p,.video-card p,.account-note{color:var(--muted)}
+.course-icon,.stat-icon,.lesson-dot,.video-card-icon,.video-intro-icon{background:#39281f;color:#ffad67}
+.btn.primary,.word-day-card .btn.primary{background:linear-gradient(135deg,#ed682c,#f59b43);color:#241914;border-color:#f59b43;box-shadow:0 7px 18px #ee73332b}
+.btn.soft,.icon-btn,.global-search,.field,.account-form input,.account-form select{background:#2b2630;color:var(--ink);border-color:var(--line)}
+.btn.soft:hover,.icon-btn:hover{background:#3a3038;border-color:#a85c3e}
+input::placeholder,textarea::placeholder{color:#aa9eab}
+.word-day-card{background:linear-gradient(130deg,#cf5726,#733127 68%,#452532);box-shadow:0 14px 32px #0c080d66}
+.progress-widget,.account-metric{background:var(--paper);border-color:var(--line)}
+.xp-track,.progress-track{background:#44323a}.xp-track span,.progress-track span{background:linear-gradient(90deg,#ed682c,#ffc15c)}
+.level-spark,.translation,.page-title,.section-head h2{color:#ffad67}
+.rule-box,.formula,.example,.hint-demo,.video-caption-note{background:#302933;border-color:#51404a;color:var(--ink)}
+.options .option,.game-option,.scramble-letter{background:#2d2832;color:var(--ink);border-color:#50424e}
+.option.selected{border-color:#f07a32;background:#3c2b27}
+.option.correct,.game-option.correct{background:#26382d;border-color:#75a77c;color:#e5f4e4}
+.option.wrong,.game-option.wrong{background:#42282a;border-color:#bc6260;color:#ffe4df}
+.game-stage{background:linear-gradient(145deg,#2c252f,#332526);border-color:#58404a;color:var(--ink)}
+.game-option:disabled{opacity:.8}.game-status{color:#ffb36b}
+.game-score-pill,.video-progress-pill{background:#39281f;border-color:#5b3e31;color:#ffd2a5}
+.video-intro{background:linear-gradient(135deg,#2b252e,#382720)}
+.video-tag{background:#39281f;color:#ffbd83}
+.video-resource,.video-caption-note{color:#c6b8c2}
+.video-watch{background:#ed762f!important;color:#241914!important}
+.account-status{background:#39281f;color:#f5d1b3}
+.account-status.error{background:#40272b;color:#ffc6c6}
+.account-status.success{background:#26382d;color:#d4efd9}
+.global-search:focus,.field:focus,.account-form input:focus,.account-form select:focus{border-color:#f07a32;box-shadow:0 0 0 3px #f07a3226;outline:none}
+::selection{background:#f07a32;color:#241914}
+@media(prefers-reduced-motion:no-preference){.hero:after{animation:spooky-float 5s ease-in-out infinite alternate}@keyframes spooky-float{from{transform:translateY(0) rotate(-5deg)}to{transform:translateY(-8px) rotate(4deg)}}}
+</style>
 </body></html>
